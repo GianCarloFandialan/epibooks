@@ -3,15 +3,15 @@ import { Button, ButtonGroup, ListGroupItem, Form, Modal } from "react-bootstrap
 
 function SingleComment(props) {
 
-  const [id, setID] = useState(props.id);
-
-  const [modifyValue, setModifyValue] = useState(props.commentListElement);
+  const [modifyComment, setModifyComment] = useState(props.comment);
 
   const [show, setShow] = useState(false);
 
-  const [asin, setAsin] = useState(props.asin)
+  const [rate, setRate] = useState(props.rate)
 
-  const [grade, setGrade] = useState(props.grade)
+  const [id, setId] = useState(props.id)
+
+  const [asin, setAsin] = useState(props.asin)
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -21,7 +21,7 @@ function SingleComment(props) {
   }
 
   const handleModifyClick = () => {
-    props.modifyReview(id, modifyValue, asin, grade);
+    props.modifyReview(id, modifyComment, asin, rate);
     handleClose();
   }
 
@@ -29,11 +29,11 @@ function SingleComment(props) {
     <>
       <ListGroupItem className="d-flex justify-content-between align-items-center row g-0 p-0">
         <div className="col-6">
-          <small>{props.commentListElement}</small>
+          <small>{props.comment}</small>
         </div>
 
       
-        <div className="col-1 p-0">{`${props.grade}👑`}</div>
+        <div className="col-1 p-0">{`${props.rate}👑`}</div>
 
         <ButtonGroup className="col-2 p-0 d-flex flex-column">
 
@@ -63,15 +63,15 @@ function SingleComment(props) {
               <Form.Control 
                 as="textarea" 
                 rows={3} 
-                value={modifyValue}
-                onChange={(e) => setModifyValue(e.target.value)}
+                value={modifyComment}
+                onChange={(e) => setModifyComment(e.target.value)}
               />
             </Form.Group>
-            <Form.Label className="fs-5">Grade</Form.Label>
+            <Form.Label className="fs-5">Rate</Form.Label>
             <Form.Select 
               size="sm" 
-              value={grade} 
-              onChange={(e) => setGrade(e.target.value)}
+              value={rate} 
+              onChange={(e) => setRate(e.target.value)}
             >
               <option>1👑</option>
               <option>2👑</option>

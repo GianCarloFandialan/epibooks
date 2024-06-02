@@ -9,19 +9,25 @@ function CommentArea(props) {
 
   const [comments, setComments] = useState([])
 
+
+  // GET
   useEffect(() => {
 
     setSpinner(true);
 
-    fetch("http://localhost:5000/cooments")
+    fetch(`https://striveschool-api.herokuapp.com/api/books/${props.asin}/comments/`, {
+      headers: { 
+        Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjVjNTQ4ZmQzMzNiMTAwMTU2OWNkMzQiLCJpYXQiOjE3MTczMzEzMjUsImV4cCI6MTcxODU0MDkyNX0.Y0bjkYMSFIjRTSw3MU4lMOmhX7W3zmspvpQlmdXiyHM"},
+    })
       .then((response) => response.json())
       .then((data) => setComments(data))
       .catch((error) => console.error("Errore nella fetch dei commenti:", error))
       .finally(() => {
         setSpinner(false);
       });
-  },[])
+  }, [])
 
+  // POST
   const sendReview = (textareaValue, selectValue, keyValue) => {
     if (!textareaValue.trim()) return; 
     setSpinner(true);
@@ -29,17 +35,22 @@ function CommentArea(props) {
     const textarea = textareaValue;
     const select = selectValue;
     const key = keyValue;
-    const newComment = { comment: textarea, grade: select, key: key};
+    const newComment = { 
+      comment: textarea, 
+      rate: select, 
+      elementId: key
+    };
 
-    fetch("http://localhost:5000/cooments", {
+    fetch(`https://striveschool-api.herokuapp.com/api/comments/`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+        Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjVjNTQ4ZmQzMzNiMTAwMTU2OWNkMzQiLCJpYXQiOjE3MTczMzEzMjUsImV4cCI6MTcxODU0MDkyNX0.Y0bjkYMSFIjRTSw3MU4lMOmhX7W3zmspvpQlmdXiyHM",
+        "Content-Type": "application/json" },
       body: JSON.stringify(newComment),
     })
       .then((response) => response.json()) 
       .then((data) => {
         setComments([...comments, data]);
-        console.log(comments);
       })
       .catch((error) =>
         console.error("Errore nella creazione del commento:", error)
@@ -49,34 +60,41 @@ function CommentArea(props) {
       });
   }
 
+  // DELETE
   const deleteReview = (id) => {
     
     setSpinner(true);
 
-    fetch(`http://localhost:5000/cooments/${id}`, {
+    fetch(`https://striveschool-api.herokuapp.com/api/comments/${id}`, {
       method: "DELETE",
+      headers: {
+        Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjVjNTQ4ZmQzMzNiMTAwMTU2OWNkMzQiLCJpYXQiOjE3MTczMzEzMjUsImV4cCI6MTcxODU0MDkyNX0.Y0bjkYMSFIjRTSw3MU4lMOmhX7W3zmspvpQlmdXiyHM"
+        }
     })
-      .then(() => setComments(comments.filter((comment) => comment.id !== id)))
+      .then(() => setComments(comments.filter((comment) => comment._id !== id)))
       .catch((error) => console.error("Errore nella fetch dei commenti:", error))
       .finally(() => {
         setSpinner(false);
       });
   }
 
-  const modifyReview = (id, modifyValue, asin, grade) => {
+
+  const modifyReview = (id, modifyComment, asin, rate) => {
 
     setSpinner(true);
 
-    fetch(`http://localhost:5000/cooments/${id}`, {
+    fetch(`https://striveschool-api.herokuapp.com/api/comments/${id}`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ comment: modifyValue, grade: grade, key: asin}),
+      headers: { 
+        Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjVjNTQ4ZmQzMzNiMTAwMTU2OWNkMzQiLCJpYXQiOjE3MTczMzEzMjUsImV4cCI6MTcxODU0MDkyNX0.Y0bjkYMSFIjRTSw3MU4lMOmhX7W3zmspvpQlmdXiyHM",
+        "Content-Type": "application/json" },
+      body: JSON.stringify({ comment: modifyComment, rate: rate, elementId: asin}),
     })
       .then((response) => response.json())
       .then((data) =>
         setComments(
           comments.map((singoloElemento) =>
-            singoloElemento.id === id ? data : singoloElemento
+            singoloElemento._id === id ? data : singoloElemento
           )
         )
       )
@@ -96,8 +114,6 @@ function CommentArea(props) {
 
       <CommentList 
         comments={comments} 
-        key={props.asin} 
-        asin={props.asin}    
         deleteReview={deleteReview}
         modifyReview={modifyReview}
         />
