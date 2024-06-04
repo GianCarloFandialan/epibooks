@@ -1,27 +1,17 @@
-import React, { useState } from "react";
-import { Row, Form} from 'react-bootstrap'
+import React, { useContext, useState } from "react";
+import { Row } from 'react-bootstrap'
 import SingleBook from './SingleBook';
+import Context from "./Context/Prova";
 
-function AllTheBooks( { genre }) {
-  const [searchInputData, setSearchInputData] = useState("")
+function AllTheBooks({ searchInputData, genre }) {
 
-  function handleChange(e) {
-    const { value } = e.target;
-    setSearchInputData(value);
-  }
+  const { darkMode } = useContext(Context);
 
   return (
     <>
-      <Form.Control
-        type="text"
-        name="search"
-        placeholder="Search"
-        value = {searchInputData}
-        onChange={handleChange}
-        className="mb-4"
-      />
 
-      <Row className="g-2">
+
+      <Row className={ darkMode ? "bg-dark g-2" : "bg-white g-2"}>
         
         {genre.filter((genre) => genre.title.toLowerCase().includes(searchInputData.toLowerCase())).map((book) => {
 

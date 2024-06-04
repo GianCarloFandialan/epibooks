@@ -1,10 +1,13 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Card, Col } from 'react-bootstrap'
 import CommentArea from './CommentArea/CommentArea';
+import Context from './Context/Prova';
 
 
 function SingleBook( { book }) {
   
+  const { darkMode } = useContext(Context);
+
   const [selected, setSelected] = useState(false)
 
   function handleClick() {
@@ -12,8 +15,8 @@ function SingleBook( { book }) {
   }
 
   return (
-    <Col xs={12} md={3}>
-      <Card className="book-cover d-flex flex-column">
+    <Col xs={12} md={3} >
+      <Card className={ darkMode ? "bg-black book-cover d-flex flex-column text-white" : "bg-white book-cover d-flex flex-column"}>
         <Card.Img variant="top" src={book.img} onClick={handleClick} className={selected ? "border border-success border-5" : "border border-danger border-5"}/>
         <Card.Body>
           <Card.Title>{book.title}</Card.Title>

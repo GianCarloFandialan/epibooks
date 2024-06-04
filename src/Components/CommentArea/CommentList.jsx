@@ -4,7 +4,6 @@ import SingleComment from "./SingleComment";
 
 function CommentList( { comments, deleteReview, modifyReview }) {
 
-  console.log(comments);
   return (
     <>
       <ListGroup>
