@@ -73,11 +73,11 @@ function SingleComment(props) {
               value={rate} 
               onChange={(e) => setRate(e.target.value)}
             >
-              <option>1👑</option>
-              <option>2👑</option>
-              <option>3👑</option>
-              <option>4👑</option>
-              <option>5👑</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
             </Form.Select>
           </Form>
         </Modal.Body>

@@ -12,6 +12,7 @@ function AddComment(props) {
 
   const handleClick = () => {
     props.sendReview(textareaValue, selectValue, keyValue);
+    alert(selectValue)
     setSelectValue(1);
     setTextareaValue("");
   }
@@ -33,11 +34,11 @@ function AddComment(props) {
           value={selectValue} 
           onChange={(e) => setSelectValue(e.target.value)}
         >
-          <option>1👑</option>
-          <option>2👑</option>
-          <option>3👑</option>
-          <option>4👑</option>
-          <option>5👑</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
         </Form.Select>
 
         <Button variant="outline-dark" onClick={handleClick}>Post</Button>
