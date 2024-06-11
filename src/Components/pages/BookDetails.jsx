@@ -1,24 +1,35 @@
+//IMPORTO GLI HOOK E I COMPONENTI DI REACT ROUTER DOM
 import { useParams } from "react-router-dom";
+//IMPORTO I VARI FILE JSON CONTENTI I GENERI ED I LORO LIBRI
 import history from "../../data/history.json";
 import romance from "../../data/romance.json";
 import fantasy from "../../data/fantasy.json";
 import scifi from "../../data/scifi.json";
 import horror from "../../data/horror.json";
+//IMPORTO ALCUNI COMPONENTI DI BOOTSTRAP
 import { Col, Row } from "react-bootstrap";
+//IMPORTO I VARI COMPONENTI
 import CommentArea from "../CommentArea/CommentArea";
-import Context from '../Context/Prova';
+//IMPORTO IL CONTEXT PER POTERLO UTILIZZARE
+import Context from '../Context/Darkmode';
+//IMPORTO GLI HOOK DI REACT
 import { useContext } from "react";
 
 
 function BookDetails() {
+  //RICAVO L'ASIN CHE E STATO USATO COME PARAMETRO
   const { asin } = useParams();
 
+  //UNISCO TUTTI I JSON DEI GENERI IN UNO UNICO IN MODO TALE DA POTER AVERE IL DETTAGLIO DI OGNI SINGOLO LIBRO IN PAGINA
   const allTheBooks = history.concat(romance).concat(fantasy).concat(scifi).concat(horror);
 
+  //RICAVO IL LIBRO DI CUI STO CERCANDO I DETTAGLI FILTRANDO L'ARRAY RICAVATO PRECEDENTEMENTE
   const libro = allTheBooks.find((book) => book.asin == parseInt(asin))
 
+  //MI "PRENDO" LA DARKMODE  
   const { darkMode } = useContext(Context);
 
+  //STILIZZO IN BASE ALLA DARKMODE
   return (
     <>
       <Row className=" py-5 g-0">

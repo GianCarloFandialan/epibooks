@@ -1,50 +1,51 @@
+//IMPORTO GLI HOOK DI REACT
 import { useContext, useState } from "react";
+//IMPORTO ALCUNI COMPONENTI DI BOOTSTRAP
 import { Button, ButtonGroup, ListGroupItem, Form, Modal } from "react-bootstrap";
-import Context from '../Context/Prova';
+//IMPORTO IL CONTEXT PER POTERLO UTILIZZARE
+import Context from '../Context/Darkmode';
 
-function SingleComment(props) {
+function SingleComment( { comment, idCommento, asinCommento, rateCommento, deleteReview, modifyReview } ) {
 
-  const [modifyComment, setModifyComment] = useState(props.comment);
+  //CREO LO STATO PER POTER GESTIRE L'EVENTUALE MODIFICA DEL COMMENTO
+  const [modifyComment, setModifyComment] = useState(comment);
 
+  //CREO LO STATO PER GESTIRE QUANDO RENDERE VISIBILE IL MODALE PER LA MDOFIICA
   const [show, setShow] = useState(false);
 
-  const [rate, setRate] = useState(props.rate)
+  //CREO LO STATO PER POTER GESTIRE L'EVENTUALE MODIFICA DELLA VALUTAZIONE
+  const [rate, setRate] = useState(rateCommento)
 
-  const [id, setId] = useState(props.id)
+  //CREO LA FUNZIONE PER GESTIRE LA CHIUSURA O APERTURA DEL MODALE IN BASE AL CLICK
+  const handleClose = () => setShow(!show);
 
-  const [asin, setAsin] = useState(props.asin)
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const handleRemoveClick = () => {
-    props.deleteReview(id)
-  }
-
+  //FUNZIONE PER GESTIRE IL CLICK DEL TASTO MODIFICA NEL MODALE PER MDOFICARE
   const handleModifyClick = () => {
-    props.modifyReview(id, modifyComment, asin, rate);
+    modifyReview(idCommento, modifyComment, asinCommento, rate);
     handleClose();
   }
 
+  //MI "PRENDO" LA DARKMODE  
   const { darkMode } = useContext(Context);
 
+  //STILIZZO IN BASE ALLA DARKMODE
   return (
     <>
       <ListGroupItem className={ darkMode ? "bg-black text-white d-flex justify-content-between align-items-center row g-0 p-0" : "bg-white d-flex justify-content-between align-items-center row g-0 p-0"}>
         <div className="col-6 ps-3">
-          <small>{props.comment}</small>
+          <small>{comment}</small>
         </div>
 
       
-        <div className="col-1 p-0">{`${props.rate}👑`}</div>
+        <div className="col-1 p-0">{`${rateCommento}👑`}</div>
 
         <ButtonGroup className="col-2 p-0 d-flex flex-column">
 
-          <Button variant="danger" onClick={handleRemoveClick} className="p-0 mb-2" size="sm">
+          <Button variant="danger" onClick={() => deleteReview(idCommento)} className="p-0 mb-2" size="sm">
             ❌
           </Button>
 
-          <Button variant="warning" onClick={handleShow} className="p-0" size="sm">
+          <Button variant="warning" onClick={handleClose} className="p-0" size="sm">
             ✏ 
           </Button>
 

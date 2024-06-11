@@ -1,16 +1,20 @@
+//IMPORTO GLI HOOK DI REACT
 import { useContext, useEffect, useState } from 'react';
+//IMPORTO I VARI COMPONENTI
 import CommentList from './CommentList';
 import AddComment from './AddComment';
+//IMPORTO ALCUNI COMPONENTI DI BOOTSTRAP
 import { Spinner } from 'react-bootstrap';
-import Context from '../Context/Prova';
+//IMPORTO IL CONTEXT PER POTERLO UTILIZZARE
+import Context from '../Context/Darkmode';
 
 function CommentArea( { selected } ) {
 
+  //CREO LO STATO PER LO SPINNER CHE INZIALMENTE è IN FALSE QUINDI NON CI DOVREBBE ESSERE
   const [spinner, setSpinner] = useState(false)
 
+  //CREO LO STATO IN CUI SARANNO CONTENUTI I COMMENTI CHE VADO AD AGGIORNARE AD OGNI CHIAMATA API
   const [comments, setComments] = useState([])
-
-
 
   // GET
   useEffect(() => {
@@ -113,21 +117,36 @@ function CommentArea( { selected } ) {
       });
   }
 
+  //MI "PRENDO" LA DARKMODE
   const { darkMode } = useContext(Context);
 
+  //STILIZZO IN BASE ALLA DARKMODE  
   return (
     <div className={darkMode ? 'border rounded m-2' : 'border rounded m-2 border-black'}>
+      {/* FACCIO COMPARIRE LO SPINNER SOLO NEL CASO LO STATO SIA SU TRUE */}
       {spinner ??       
         <Spinner animation="border" role="status">
           <span className="visually-hidden">Loading...</span>
         </Spinner>
       }
 
+      {/* 
+      AL COMPOENTE "COMMENTLIST" VADO A PASSARE LE PROPS:
+        -LO SATTO COMMENTS, CONTENTE L'ARRAY DEI COMMENTI
+        -LA FUNZIONALITA PER CANCELLARE I COMMENTI
+        -LA FUNZIOANLITA PER MODIFCARE UN COMMENTO
+      */}
       <CommentList 
         comments={comments} 
         deleteReview={deleteReview}
         modifyReview={modifyReview}
-        />
+      />
+
+      {/*       
+        AL COMPOENTE "ADDCOMMENT" VADO A PASSARE LE PROPS:
+        -LA FUNZIONE PER AGGIUNGERE IL COMMENTO
+        -L'ASIN DEL LIBRO SELEZIONATO, IN MODO TALE DA AGGIUNGERE IL COMMENTO AL LIBRO SPECIFICO
+      */}
       <AddComment 
         sendReview={sendReview} 
         asin={selected}

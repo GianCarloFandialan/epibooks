@@ -1,10 +1,14 @@
-import React, { useContext } from "react";
-import Context from "./Context/Prova";
+//IMPORTO GLI HOOK DI REACT
+import { useContext } from "react";
+//IMPORTO IL CONTEXT PER POTERLO UTILIZZARE
+import Context from "./Context/Darkmode";
 
 function MyFooter() {
 
+  //MI "PRENDO" LA DARKMODE
   const { darkMode } = useContext(Context);
 
+  //STILIZZO IN BASE ALLA DARKMODE
   return (
     <>
       <div className={ darkMode ? "bg-dark text-white container" : "bg-white container text-dark"}>

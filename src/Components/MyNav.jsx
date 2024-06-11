@@ -1,17 +1,24 @@
+//IMPORTO GLI HOOK DI REACT
 import { useContext, useState } from 'react';
+//IMPORTO ALCUNI COMPONENTI DI BOOTSTRAP
 import { Form, Container, Nav, Navbar } from 'react-bootstrap';
-import Context from './Context/Prova';
+//IMPORTO IL CONTEXT PER POTERLO UTILIZZARE
+import Context from './Context/Darkmode';
+//IMPORTO UN COMPONENTE DI REACT ROUTER DOM
 import { NavLink } from 'react-router-dom';
 
 function MyNav( {handleSearchBar, searchInputData, handleDarkMode} ) {
 
+  //MI "PRENDO" LA DARKMODE
   const { darkMode } = useContext(Context);
 
+  //CREO UNA FUNZIONE PER POTER GESTIRE IL VALORE DI INPUT DELLA SEARCCHBAR E ANCHE PER GESTIRE LO STATO IN APP
   function handleChange(e) {
     const { value } = e.target;
     handleSearchBar(value)
   }
 
+  //STILIZZO IN BASE ALLA DARKMODE
   return (
     <Navbar expand="lg" bg={darkMode ? "black" : "light"} data-bs-theme={darkMode ? "dark" : "light"} >
       <Container fluid>
@@ -32,6 +39,7 @@ function MyNav( {handleSearchBar, searchInputData, handleDarkMode} ) {
           </Nav>
         </Navbar.Collapse>
 
+        {/* IN QUESTO FORM VADO A GESTIRE LA FUNZIONALITA CHE MI PERMETTE DI GESTIRE LA DARKMODE PASSATA A QUESTO COMPONENTE COME PROP */}
         <Form.Check
         type="switch"
         id="custom-switch"
