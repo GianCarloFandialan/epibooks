@@ -10,8 +10,8 @@ function CommentList( { comments, deleteReview, modifyReview }) {
 
   return (
     <>
-      <ListGroup className={ darkMode ? "bg-black text-white" : "bg-white"}>
-        <h4>Reviews</h4>
+      <ListGroup className={ darkMode ? "bg-black text-white rounded-top p-2" : "bg-white rounded-top p-2"}>
+        <h4 className="text-center">Reviews</h4>
           {comments.map(comment => 
             
             <SingleComment

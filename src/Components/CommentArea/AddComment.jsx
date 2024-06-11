@@ -22,18 +22,19 @@ function AddComment(props) {
 
   return (
     <>
-      <Form className={ darkMode ? "bg-black text-white fs-5 d-flex flex-column align-items-center" : "bg-white fs-5"}>
+      <Form className={ darkMode ? "bg-black text-white fs-5 d-flex flex-column align-items-center rounded-bottom p-2" : "bg-white fs-5 rounded-bottom p-2 d-flex flex-column align-items-center"}>
         <Form.Label >Comment here</Form.Label>
         <Form.Control 
           as="textarea" 
           rows={3} 
           value={textareaValue} 
           onChange={(e) => setTextareaValue(e.target.value)}
+          className={ darkMode ? "bg-black text-white border rounded" : "bg-white border rounded border-black"}
         />
 
         <Form.Select 
           size="sm" 
-          className="my-3" 
+          className={ darkMode ? "bg-black text-white my-3 border rounded" : "bg-white my-3 border rounded border-black"}
           value={selectValue} 
           onChange={(e) => setSelectValue(e.target.value)}
         >
@@ -44,7 +45,7 @@ function AddComment(props) {
           <option>5</option>
         </Form.Select>
 
-        <Button variant={darkMode ? "outline-light" : "outline-dark"} onClick={handleClick}>Post</Button>
+        <Button variant={darkMode ? "outline-light mb-3" : "outline-dark mb-3"} onClick={handleClick}>Post</Button>
 
       </Form>
     </>

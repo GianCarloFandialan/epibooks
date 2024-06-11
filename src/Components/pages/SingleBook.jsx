@@ -13,8 +13,8 @@ function SingleBook( { book, handleSelected, selected, goToBookDetails }) {
   }
 
   return (
-    <Col xs={12} md={3} >
-      <Card className={ darkMode ? "bg-black book-cover d-flex flex-column text-white" : "bg-white book-cover d-flex flex-column"}>
+    <Col xs={12} md={6} lg={4} xxl={3}>
+      <Card className={ darkMode ? "bg-black book-cover d-flex flex-column text-white p-3 mb-3 border rounded" : "bg-white book-cover d-flex flex-column p-3 mb-3 border rounded border-black"}>
         <Card.Img variant="top" src={book.img} onClick={() => handleClick()} className={book.asin == selected ? "border border-success border-5" : "border border-danger border-5"}/>
         <Card.Body>
           <Card.Title>{book.title}</Card.Title>

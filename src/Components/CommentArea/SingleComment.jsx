@@ -31,7 +31,7 @@ function SingleComment(props) {
   return (
     <>
       <ListGroupItem className={ darkMode ? "bg-black text-white d-flex justify-content-between align-items-center row g-0 p-0" : "bg-white d-flex justify-content-between align-items-center row g-0 p-0"}>
-        <div className="col-6">
+        <div className="col-6 ps-3">
           <small>{props.comment}</small>
         </div>
 

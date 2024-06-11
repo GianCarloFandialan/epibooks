@@ -1,13 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import CommentList from './CommentList';
 import AddComment from './AddComment';
 import { Spinner } from 'react-bootstrap';
+import Context from '../Context/Prova';
 
 function CommentArea( { selected } ) {
 
   const [spinner, setSpinner] = useState(false)
 
   const [comments, setComments] = useState([])
+
 
 
   // GET
@@ -85,6 +87,7 @@ function CommentArea( { selected } ) {
   }
 
 
+  //PUT
   const modifyReview = (id, modifyComment, asin, rate) => {
 
     setSpinner(true);
@@ -110,8 +113,10 @@ function CommentArea( { selected } ) {
       });
   }
 
+  const { darkMode } = useContext(Context);
+
   return (
-    <div className='p-2'>
+    <div className={darkMode ? 'border rounded m-2' : 'border rounded m-2 border-black'}>
       {spinner ??       
         <Spinner animation="border" role="status">
           <span className="visually-hidden">Loading...</span>

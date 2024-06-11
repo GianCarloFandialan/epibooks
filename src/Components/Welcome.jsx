@@ -7,11 +7,11 @@ function Welcome() {
   const { darkMode } = useContext(Context);
 
   return (
-    <>
-        <Alert variant={darkMode ? "dark" : "light"}>
+    <div className='d-flex justify-content-center'>
+        <Alert variant={darkMode ? "dark text-center mt-3 w-75" : "light text-center mt-3 w-75"}>
           Welcome to EpiBook
         </Alert>
-    </>
+    </div>
   );
 }
 

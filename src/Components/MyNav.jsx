@@ -13,8 +13,8 @@ function MyNav( {handleSearchBar, searchInputData, handleDarkMode} ) {
   }
 
   return (
-    <Navbar expand="lg" bg={darkMode ? "dark" : "light"} data-bs-theme={darkMode ? "dark" : "light"} >
-      <Container>
+    <Navbar expand="lg" bg={darkMode ? "black" : "light"} data-bs-theme={darkMode ? "dark" : "light"} >
+      <Container fluid>
         <Navbar.Brand href="#home">EpicBooks</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

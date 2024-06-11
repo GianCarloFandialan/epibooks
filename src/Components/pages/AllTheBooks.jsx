@@ -25,7 +25,7 @@ function AllTheBooks({ searchInputData, genre }) {
   return (
     <>
       <Row className="g-0">
-        <Col xs={12} md={8} >
+        <Col xs={8} md={8} >
           <Row>
             {genre.filter((genre) => genre.title.toLowerCase().includes(searchInputData.toLowerCase())).map((book) => {
 
@@ -36,7 +36,7 @@ function AllTheBooks({ searchInputData, genre }) {
             })}
           </Row>
         </Col>
-        <Col xs={12} md={4} className="px-0"> 
+        <Col xs={4} md={4} className="px-0"> 
           <CommentArea key={selected} selected={selected}/>
         </Col>
       </Row>
