@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import Context from '../Context/Prova';
 
 
 function AddComment(props) {
@@ -17,10 +18,12 @@ function AddComment(props) {
     setTextareaValue("");
   }
 
+  const { darkMode } = useContext(Context);
+
   return (
     <>
-      <Form>
-        <Form.Label className="fs-5">Comment here</Form.Label>
+      <Form className={ darkMode ? "bg-black text-white fs-5 d-flex flex-column align-items-center" : "bg-white fs-5"}>
+        <Form.Label >Comment here</Form.Label>
         <Form.Control 
           as="textarea" 
           rows={3} 
@@ -41,7 +44,7 @@ function AddComment(props) {
           <option>5</option>
         </Form.Select>
 
-        <Button variant="outline-dark" onClick={handleClick}>Post</Button>
+        <Button variant={darkMode ? "outline-light" : "outline-dark"} onClick={handleClick}>Post</Button>
 
       </Form>
     </>

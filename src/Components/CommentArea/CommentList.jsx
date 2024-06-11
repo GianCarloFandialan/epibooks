@@ -1,12 +1,16 @@
 import { ListGroup } from "react-bootstrap";
 import SingleComment from "./SingleComment";
+import { useContext } from "react";
+import Context from '../Context/Prova';
 
 
 function CommentList( { comments, deleteReview, modifyReview }) {
 
+  const { darkMode } = useContext(Context);
+
   return (
     <>
-      <ListGroup>
+      <ListGroup className={ darkMode ? "bg-black text-white" : "bg-white"}>
         <h4>Reviews</h4>
           {comments.map(comment => 
             

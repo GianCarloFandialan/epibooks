@@ -8,7 +8,7 @@ function Welcome() {
 
   return (
     <>
-        <Alert variant={darkMode ? "dark" : "light"} className='my-4'>
+        <Alert variant={darkMode ? "dark" : "light"}>
           Welcome to EpiBook
         </Alert>
     </>

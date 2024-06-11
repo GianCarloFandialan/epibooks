@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Button, ButtonGroup, ListGroupItem, Form, Modal } from "react-bootstrap";
+import Context from '../Context/Prova';
 
 function SingleComment(props) {
 
@@ -25,9 +26,11 @@ function SingleComment(props) {
     handleClose();
   }
 
+  const { darkMode } = useContext(Context);
+
   return (
     <>
-      <ListGroupItem className="d-flex justify-content-between align-items-center row g-0 p-0">
+      <ListGroupItem className={ darkMode ? "bg-black text-white d-flex justify-content-between align-items-center row g-0 p-0" : "bg-white d-flex justify-content-between align-items-center row g-0 p-0"}>
         <div className="col-6">
           <small>{props.comment}</small>
         </div>

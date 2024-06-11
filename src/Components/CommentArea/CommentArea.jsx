@@ -3,7 +3,7 @@ import CommentList from './CommentList';
 import AddComment from './AddComment';
 import { Spinner } from 'react-bootstrap';
 
-function CommentArea(props) {
+function CommentArea( { selected } ) {
 
   const [spinner, setSpinner] = useState(false)
 
@@ -15,17 +15,23 @@ function CommentArea(props) {
 
     setSpinner(true);
 
-    fetch(`https://striveschool-api.herokuapp.com/api/books/${props.asin}/comments/`, {
-      headers: { 
-        Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjVjNTQ4ZmQzMzNiMTAwMTU2OWNkMzQiLCJpYXQiOjE3MTczMzEzMjUsImV4cCI6MTcxODU0MDkyNX0.Y0bjkYMSFIjRTSw3MU4lMOmhX7W3zmspvpQlmdXiyHM"},
-    })
-      .then((response) => response.json())
-      .then((data) => setComments(data))
-      .catch((error) => console.error("Errore nella fetch dei commenti:", error))
-      .finally(() => {
-        setSpinner(false);
-      });
-  }, [])
+    const loadComments = (selected) => {
+      fetch(`https://striveschool-api.herokuapp.com/api/comments/${selected}`, {
+        headers: { 
+          Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjVjNTQ4ZmQzMzNiMTAwMTU2OWNkMzQiLCJpYXQiOjE3MTczMzEzMjUsImV4cCI6MTcxODU0MDkyNX0.Y0bjkYMSFIjRTSw3MU4lMOmhX7W3zmspvpQlmdXiyHM"},
+      })
+        .then((response) => response.json())
+        .then((data) => setComments(data))
+        .catch((error) => console.error("Errore nella fetch dei commenti:", error))
+        .finally(() => {
+          setSpinner(false);
+        });
+    }
+    if (selected) {
+      loadComments(selected)
+    }
+
+  }, [selected])
 
   // POST
   const sendReview = (textareaValue, selectValue, keyValue) => {
@@ -105,7 +111,7 @@ function CommentArea(props) {
   }
 
   return (
-    <>
+    <div className='p-2'>
       {spinner ??       
         <Spinner animation="border" role="status">
           <span className="visually-hidden">Loading...</span>
@@ -119,10 +125,10 @@ function CommentArea(props) {
         />
       <AddComment 
         sendReview={sendReview} 
-        asin={props.asin}
+        asin={selected}
         className="border border-black"
       />
-    </>
+    </div>
   )
 }
 

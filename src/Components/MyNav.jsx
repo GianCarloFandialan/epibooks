@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 import { Form, Container, Nav, Navbar } from 'react-bootstrap';
 import Context from './Context/Prova';
+import { NavLink } from 'react-router-dom';
 
 function MyNav( {handleSearchBar, searchInputData, handleDarkMode} ) {
 
@@ -17,7 +18,7 @@ function MyNav( {handleSearchBar, searchInputData, handleDarkMode} ) {
         <Navbar.Brand href="#home">EpicBooks</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
+          <Nav className="me-auto d-flex align-items-center">
             <Form.Control
               type="text"
               name="search"
@@ -25,9 +26,9 @@ function MyNav( {handleSearchBar, searchInputData, handleDarkMode} ) {
               value = {searchInputData}
               onChange={handleChange}
             />
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#about">About</Nav.Link>
-            <Nav.Link href="#browse">Browse</Nav.Link>            
+            <NavLink to="/" className="nav-link">Home</NavLink>
+            <NavLink className="nav-link">About</NavLink>
+            <NavLink className="nav-link">Browse</NavLink>            
           </Nav>
         </Navbar.Collapse>
 
