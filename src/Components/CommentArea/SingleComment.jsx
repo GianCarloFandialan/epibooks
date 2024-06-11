@@ -11,18 +11,30 @@ function SingleComment( { comment, idCommento, asinCommento, rateCommento, delet
   const [modifyComment, setModifyComment] = useState(comment);
 
   //CREO LO STATO PER GESTIRE QUANDO RENDERE VISIBILE IL MODALE PER LA MDOFIICA
-  const [show, setShow] = useState(false);
+  const [modifyShow, setModifyShow] = useState(false);
+
+  //CREO LO STATO PER GESTIRE QUANDO RENDERE VISIBILE IL MODALE PER LA CANCELLAZIONE
+  const [deleteShow, setDeleteShow] = useState(false);
 
   //CREO LO STATO PER POTER GESTIRE L'EVENTUALE MODIFICA DELLA VALUTAZIONE
   const [rate, setRate] = useState(rateCommento)
 
-  //CREO LA FUNZIONE PER GESTIRE LA CHIUSURA O APERTURA DEL MODALE IN BASE AL CLICK
-  const handleClose = () => setShow(!show);
+  //CREO LA FUNZIONE PER GESTIRE LA CHIUSURA O APERTURA DEL MODALE DI MODIFICA IN BASE AL CLICK
+  const handleCloseModify = () => setModifyShow(!modifyShow);
+
+  //CREO LA FUNZIONE PER GESTIRE LA CHIUSURA O APERTURA DEL MODALE DI CANCELLAZIONE IN BASE AL CLICK
+  const handleCloseDelete = () => setDeleteShow(!deleteShow);
 
   //FUNZIONE PER GESTIRE IL CLICK DEL TASTO MODIFICA NEL MODALE PER MDOFICARE
   const handleModifyClick = () => {
     modifyReview(idCommento, modifyComment, asinCommento, rate);
-    handleClose();
+    handleCloseModify();
+  }
+
+  //FUNZIONE PER GESTIRE IL CLICK DEL TASTO MODIFICA NEL MODALE PER MDOFICARE
+  const handleDeleteClick = () => {
+    deleteReview(idCommento);
+    handleCloseDelete();
   }
 
   //MI "PRENDO" LA DARKMODE  
@@ -31,7 +43,7 @@ function SingleComment( { comment, idCommento, asinCommento, rateCommento, delet
   //STILIZZO IN BASE ALLA DARKMODE
   return (
     <>
-      <ListGroupItem className={ darkMode ? "bg-black text-white d-flex justify-content-between align-items-center row g-0 p-0" : "bg-white d-flex justify-content-between align-items-center row g-0 p-0"}>
+      <ListGroupItem className={ darkMode ? "bg-black text-white d-flex justify-content-between align-items-center row g-0 p-0 border" : "bg-white d-flex justify-content-between align-items-center row g-0 p-0 border-black border"}>
         <div className="col-6 ps-3">
           <small>{comment}</small>
         </div>
@@ -41,11 +53,11 @@ function SingleComment( { comment, idCommento, asinCommento, rateCommento, delet
 
         <ButtonGroup className="col-2 p-0 d-flex flex-column">
 
-          <Button variant="danger" onClick={() => deleteReview(idCommento)} className="p-0 mb-2" size="sm">
+          <Button variant="danger" onClick={handleCloseDelete} className="p-0 mb-2" size="sm">
             ❌
           </Button>
 
-          <Button variant="warning" onClick={handleClose} className="p-0" size="sm">
+          <Button variant="warning" onClick={handleCloseModify} className="p-0" size="sm">
             ✏ 
           </Button>
 
@@ -53,12 +65,13 @@ function SingleComment( { comment, idCommento, asinCommento, rateCommento, delet
 
       </ListGroupItem>
 
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
+      {/* MODALE PER MDOFICARE IL COMMENTO */}
+      <Modal show={modifyShow} onHide={handleCloseModify} >
+        <Modal.Header closeButton className={ darkMode ? "bg-black text-white" : "bg-white"} data-bs-theme={ darkMode ? "dark" : ""}>
           <Modal.Title >Modify</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <Form>
+        <Modal.Body className={ darkMode ? "bg-black text-white" : "bg-white"}>
+          <Form >
             <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"
@@ -69,6 +82,7 @@ function SingleComment( { comment, idCommento, asinCommento, rateCommento, delet
                 rows={3} 
                 value={modifyComment}
                 onChange={(e) => setModifyComment(e.target.value)}
+                className={ darkMode ? "bg-black text-white" : "bg-white"}
               />
             </Form.Group>
             <Form.Label className="fs-5">Rate</Form.Label>
@@ -76,6 +90,7 @@ function SingleComment( { comment, idCommento, asinCommento, rateCommento, delet
               size="sm" 
               value={rate} 
               onChange={(e) => setRate(e.target.value)}
+              className={ darkMode ? "bg-black text-white" : "bg-white"}
             >
               <option>1</option>
               <option>2</option>
@@ -85,12 +100,30 @@ function SingleComment( { comment, idCommento, asinCommento, rateCommento, delet
             </Form.Select>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+        <Modal.Footer className={ darkMode ? "bg-black text-white" : "bg-white"}>
+          <Button variant="secondary" onClick={handleCloseModify}>
             Close
           </Button>
-          <Button variant="warning" onClick={handleModifyClick}>
-            Modifica ✏ 
+          <Button variant="warning" onClick={handleModifyClick} >
+            Modify ✏ 
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      {/* MODALE PER CANCELLARE IL COMMENTO */}
+      <Modal show={deleteShow} onHide={handleCloseDelete} >
+        <Modal.Header closeButton className={ darkMode ? "bg-black text-white" : "bg-white"} data-bs-theme={ darkMode ? "dark" : ""}>
+          <Modal.Title >Delete</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className={ darkMode ? "bg-black text-white" : "bg-white"}>
+          <h3>Press delete to remove the comment</h3>
+        </Modal.Body>
+        <Modal.Footer className={ darkMode ? "bg-black text-white" : "bg-white"}>
+          <Button variant="secondary" onClick={handleCloseDelete}>
+            Close
+          </Button>
+          <Button variant="danger" onClick={handleDeleteClick}>
+            Delete ❌ 
           </Button>
         </Modal.Footer>
       </Modal>

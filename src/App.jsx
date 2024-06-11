@@ -47,7 +47,7 @@ function App() {
 
   return (
     //AVVOLGO TUTTO IN UN DIV SOLO PER POTER MODIFICARE IL COLORE DI BACKGOUND IN BASE ALLA DARK MODE
-    <div className={ darkMode ? "bg-dark g-2" : "bg-white g-2"}>
+    <div className={ darkMode ? "bg-dark g-2" : "bg-secondary-subtle g-2"}>
 
       {/* AVVOLGO TUTTO NEL CONTEXT PROVIDER IN MODO TALE DA POTERLO USARE */}
       <Context.Provider value={ {darkMode, setDarkMode} }>
@@ -77,11 +77,11 @@ function App() {
                   </div>
 
                   {/* CAMBIO IL TITOLO DELLA PAGINA INDICANTE IL GENERE IN BASE AL GENERE SELEZIONATO */}
-                  {genre === romance && <h1 className={ darkMode ? "text-white text-center" : "bg-white text-center"}>Romance books</h1>}
-                  {genre === fantasy && <h1 className={ darkMode ? "text-white text-center" : "bg-white text-center"}>Fantasy books</h1>}
-                  {genre === history && <h1 className={ darkMode ? "text-white text-center" : "bg-white text-center"}>History books</h1>}
-                  {genre === horror && <h1 className={ darkMode ? "text-white text-center" : "bg-white text-center"}>Horror books</h1>}
-                  {genre === scifi && <h1 className={ darkMode ? "text-white text-center" : "bg-white text-center"}>Scifi books</h1>}
+                  {genre === romance && <h1 className={ darkMode ? "text-white text-center" : "bg-secondary-subtle text-center"}>Romance books</h1>}
+                  {genre === fantasy && <h1 className={ darkMode ? "text-white text-center" : "bg-secondary-subtle text-center"}>Fantasy books</h1>}
+                  {genre === history && <h1 className={ darkMode ? "text-white text-center" : "bg-secondary-subtle text-center"}>History books</h1>}
+                  {genre === horror && <h1 className={ darkMode ? "text-white text-center" : "bg-secondary-subtle text-center"}>Horror books</h1>}
+                  {genre === scifi && <h1 className={ darkMode ? "text-white text-center" : "bg-secondary-subtle text-center"}>Scifi books</h1>}
 
                   {/* COMPONENTE CONTENTE TUTTI I LIBRI, GLI PASSO COME PROPRIETA IL RISULTATO DELLA BARRA DI RICERCA IN MODO TALE DA FILTRARE I LIBRI ED IL GENERE ANCHE QUESTO PER RENDERIZZALI */}
                   <AllTheBooks searchInputData={searchInputData} genre={genre} />

@@ -63,9 +63,11 @@ function CommentArea( { selected } ) {
       .then((response) => response.json()) 
       .then((data) => {
         setComments([...comments, data]);
+        alert("Comment added")
       })
-      .catch((error) =>
+      .catch((error) => {
         console.error("Errore nella creazione del commento:", error)
+        alert("Error")}
       )
       .finally(() => {
         setSpinner(false);
@@ -83,8 +85,14 @@ function CommentArea( { selected } ) {
         Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjVjNTQ4ZmQzMzNiMTAwMTU2OWNkMzQiLCJpYXQiOjE3MTczMzEzMjUsImV4cCI6MTcxODU0MDkyNX0.Y0bjkYMSFIjRTSw3MU4lMOmhX7W3zmspvpQlmdXiyHM"
         }
     })
-      .then(() => setComments(comments.filter((comment) => comment._id !== id)))
-      .catch((error) => console.error("Errore nella fetch dei commenti:", error))
+      .then(() => {
+        setComments(comments.filter((comment) => comment._id !== id));
+        alert("Comment Deleted")
+      })
+      .catch((error) => {
+        console.error("Errore nella fetch dei commenti:", error); 
+        alert("Error")
+      })
       .finally(() => {
         setSpinner(false);
       });
@@ -104,14 +112,16 @@ function CommentArea( { selected } ) {
       body: JSON.stringify({ comment: modifyComment, rate: rate, elementId: asin}),
     })
       .then((response) => response.json())
-      .then((data) =>
+      .then((data) => {
         setComments(
           comments.map((singoloElemento) =>
             singoloElemento._id === id ? data : singoloElemento
           )
-        )
+        );
+        alert("Comment Modified")
+      }
       )
-      .catch((error) => console.error("Errore nella fetch dei commenti:", error))
+      .catch((error) => {console.error("Errore nella fetch dei commenti:", error); alert("Error")})
       .finally(() => {
         setSpinner(false);
       });
