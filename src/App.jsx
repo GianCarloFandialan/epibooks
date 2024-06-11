@@ -47,7 +47,7 @@ function App() {
 
   return (
     //AVVOLGO TUTTO IN UN DIV SOLO PER POTER MODIFICARE IL COLORE DI BACKGOUND IN BASE ALLA DARK MODE
-    <div className={ darkMode ? "bg-dark g-2" : "bg-secondary-subtle g-2"}>
+    <div className={ darkMode ? "bg-dark g-2 position-relative" : "bg-secondary-subtle g-2 position-relative"} style={{minHeight:"100vh", paddingBottom:"10vh"}}>
 
       {/* AVVOLGO TUTTO NEL CONTEXT PROVIDER IN MODO TALE DA POTERLO USARE */}
       <Context.Provider value={ {darkMode, setDarkMode} }>

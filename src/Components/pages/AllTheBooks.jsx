@@ -7,6 +7,8 @@ import SingleBook from './SingleBook';
 import CommentArea from "../CommentArea/CommentArea";
 //IMPORTO GLI HOOK E I COMPONENTI DI REACT ROUTER DOM
 import { useNavigate } from "react-router-dom";
+//IMPORTO IL CONTEXT PER POTERLO UTILIZZARE
+import Context from '../Context/Darkmode';
 
 
 
@@ -28,10 +30,15 @@ function AllTheBooks({ searchInputData, genre }) {
     navigate(`/${asin}`)
   }
 
+  const results = genre.filter((genre) => genre.title.toLowerCase().includes(searchInputData.toLowerCase()));
+
+  //MI "PRENDO" LA DARKMODE
+  const { darkMode } = useContext(Context);
+
   //STILIZZO IN BASE ALLA DARKMODE
   return (
     <>
-      <Row className="g-0">
+      {results.length == 0 ? <p className={darkMode ? " text-center fw-bold my-5 text-white" : "text-center fw-bold my-5"} style={{fontSize:"10vw"}}>No results found</p> : <Row className="g-0">
         <Col xs={8} md={8} >
           <Row>
             {/* FILTRO IL CONTENUTO DEI LIBRI IN BASE A CIO CHE C'è NELLA BARRA DI RICERCA GRAZIE ALLE PROPS RICEVUTE(GENRE E SEARCHINPUTDATA) */}
@@ -60,7 +67,8 @@ function AllTheBooks({ searchInputData, genre }) {
           */}
           <CommentArea key={selected} selected={selected}/>
         </Col>
-      </Row>
+      </Row>}
+      
     </>
   )
 } 
