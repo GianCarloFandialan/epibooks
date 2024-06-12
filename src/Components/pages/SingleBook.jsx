@@ -3,7 +3,7 @@ import { useContext } from 'react';
 //IMPORTO ALCUNI COMPONENTI DI BOOTSTRAP
 import { Button, Card, Col } from 'react-bootstrap'
 //IMPORTO IL CONTEXT PER POTERLO UTILIZZARE
-import Context from '../Context/Darkmode';
+import Context from '../modules/Darkmode';
 
 function SingleBook( { book, handleSelected, selected, goToBookDetails }) {
 

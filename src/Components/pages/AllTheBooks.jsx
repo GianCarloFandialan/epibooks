@@ -8,7 +8,7 @@ import CommentArea from "../CommentArea/CommentArea";
 //IMPORTO GLI HOOK E I COMPONENTI DI REACT ROUTER DOM
 import { useNavigate } from "react-router-dom";
 //IMPORTO IL CONTEXT PER POTERLO UTILIZZARE
-import Context from '../Context/Darkmode';
+import Context from '../modules/Darkmode';
 
 
 
@@ -27,7 +27,7 @@ function AllTheBooks({ searchInputData, genre }) {
 
   //CREO UNA FUNZIONE PER GESTIRE LO USE NVAIGATE IN BASE ALL'ASIN DEL LIBRO IN CUI ANDRO A VEDERE I DETTAGLI
   function goToBookDetails(asin) {
-    navigate(`/${asin}`)
+    navigate(`/bookdetails/${asin}`)
   }
 
   const results = genre.filter((genre) => genre.title.toLowerCase().includes(searchInputData.toLowerCase()));

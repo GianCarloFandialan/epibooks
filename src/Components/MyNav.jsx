@@ -3,9 +3,9 @@ import { useContext, useState } from 'react';
 //IMPORTO ALCUNI COMPONENTI DI BOOTSTRAP
 import { Form, Container, Nav, Navbar } from 'react-bootstrap';
 //IMPORTO IL CONTEXT PER POTERLO UTILIZZARE
-import Context from './Context/Darkmode';
+import Context from './modules/Darkmode';
 //IMPORTO UN COMPONENTE DI REACT ROUTER DOM
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 function MyNav( {handleSearchBar, searchInputData, handleDarkMode} ) {
 
@@ -22,7 +22,9 @@ function MyNav( {handleSearchBar, searchInputData, handleDarkMode} ) {
   return (
     <Navbar expand="lg" bg={darkMode ? "black" : "light"} data-bs-theme={darkMode ? "dark" : "light"} >
       <Container fluid>
-        <Navbar.Brand href="#home">EpicBooks</Navbar.Brand>
+        <Link to="/" className='link-underline link-underline-opacity-0'>
+          <Navbar.Brand>EpicBooks</Navbar.Brand>
+        </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto d-flex align-items-center">

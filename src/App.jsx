@@ -8,7 +8,7 @@ import MyNav from './Components/MyNav'
 import Welcome from './Components/Welcome'
 import MyFooter from './Components/MyFooter'
 import AllTheBooks from './Components/pages/AllTheBooks'
-import Context from './Components/Context/Darkmode'
+import Context from './Components/modules/Darkmode'
 //IMPORTO I VARI FILE JSON CONTENTI I GENERI ED I LORO LIBRI
 import history from "./data/history.json";
 import fantasy from "./data/fantasy.json";
@@ -21,8 +21,6 @@ import { Button, ButtonGroup } from 'react-bootstrap'
 import { useState } from 'react'
 //IMPORTO GLI HOOK E I COMPONENTI DI REACT ROUTER DOM
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-
-
 
 function App() {
 
@@ -89,7 +87,7 @@ function App() {
               } 
             />
             <Route path="*" element={<NotFound />} />
-            <Route path="/:asin" element={<BookDetails />}/>
+            <Route path="/bookdetails/:asin" element={<BookDetails />}/>
           </Routes>
 
           <MyFooter/>

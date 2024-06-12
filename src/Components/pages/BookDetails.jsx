@@ -11,7 +11,7 @@ import { Col, Row } from "react-bootstrap";
 //IMPORTO I VARI COMPONENTI
 import CommentArea from "../CommentArea/CommentArea";
 //IMPORTO IL CONTEXT PER POTERLO UTILIZZARE
-import Context from '../Context/Darkmode';
+import Context from '../modules/Darkmode';
 //IMPORTO GLI HOOK DI REACT
 import { useContext } from "react";
 
@@ -36,10 +36,10 @@ function BookDetails() {
         <Col md={4} className="d-flex justify-content-center">
           <img src={libro.img} alt="immagine libro" className="w-50"/>
         </Col>
-        <Col md={7} className="d-flex flex-column justify-content-center align-items-baseline border border-start-0 border-3">
-          <h2 className={ darkMode ? "text-white" : "bg-white"}>{libro.title}</h2>
-          <h4 className={ darkMode ? "text-white" : "bg-white"}>Genre: {libro.category}</h4>
-          <h6 className={ darkMode ? "text-white" : "bg-white"}>Price: {libro.price}$</h6>
+        <Col md={7} className={ darkMode ? "d-flex flex-column justify-content-center align-items-baseline border border-start-0 border-3" : "d-flex flex-column justify-content-center align-items-baseline border border-start-0 border-3 border-dark-subtle"}>
+          <h2 className={ darkMode ? "text-white" : "bg-secondary-subtle"}>{libro.title}</h2>
+          <h4 className={ darkMode ? "text-white" : "bg-secondary-subtle"}>Genre: {libro.category}</h4>
+          <h6 className={ darkMode ? "text-white" : "bg-secondary-subtle"}>Price: {libro.price}$</h6>
         </Col>
       </Row>
       <div className="container-fluid d-flex justify-content-center pt-5">

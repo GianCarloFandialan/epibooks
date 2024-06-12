@@ -5,7 +5,7 @@ import SingleComment from "./SingleComment";
 //IMPORTO GLI HOOK DI REACT
 import { useContext } from "react";
 //IMPORTO IL CONTEXT PER POTERLO UTILIZZARE
-import Context from '../Context/Darkmode';
+import Context from '../modules/Darkmode';
 
 
 function CommentList( { comments, deleteReview, modifyReview }) {

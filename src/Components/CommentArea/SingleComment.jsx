@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 //IMPORTO ALCUNI COMPONENTI DI BOOTSTRAP
 import { Button, ButtonGroup, ListGroupItem, Form, Modal } from "react-bootstrap";
 //IMPORTO IL CONTEXT PER POTERLO UTILIZZARE
-import Context from '../Context/Darkmode';
+import Context from '../modules/Darkmode';
 
 function SingleComment( { comment, idCommento, asinCommento, rateCommento, deleteReview, modifyReview } ) {
 

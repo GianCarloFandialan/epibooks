@@ -6,7 +6,8 @@ import AddComment from './AddComment';
 //IMPORTO ALCUNI COMPONENTI DI BOOTSTRAP
 import { Spinner } from 'react-bootstrap';
 //IMPORTO IL CONTEXT PER POTERLO UTILIZZARE
-import Context from '../Context/Darkmode';
+import Context from '../modules/Darkmode';
+import axios from '../modules/ApiAxios'
 
 function CommentArea( { selected } ) {
 
@@ -21,57 +22,45 @@ function CommentArea( { selected } ) {
 
     setSpinner(true);
 
-    const loadComments = (selected) => {
-      fetch(`https://striveschool-api.herokuapp.com/api/comments/${selected}`, {
-        headers: { 
-          Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjVjNTQ4ZmQzMzNiMTAwMTU2OWNkMzQiLCJpYXQiOjE3MTczMzEzMjUsImV4cCI6MTcxODU0MDkyNX0.Y0bjkYMSFIjRTSw3MU4lMOmhX7W3zmspvpQlmdXiyHM"},
-      })
-        .then((response) => response.json())
-        .then((data) => setComments(data))
-        .catch((error) => console.error("Errore nella fetch dei commenti:", error))
+    if (selected) {
+      axios.get(selected)
+        .then(response => {
+          setComments(response.data);
+        })
+        .catch((error) => {
+          console.error("Errore nella creazione del commento:", error)
+          alert("Errore nel caricamento dei commenti")
+        })
         .finally(() => {
           setSpinner(false);
-        });
-    }
-    if (selected) {
-      loadComments(selected)
+        })
     }
 
   }, [selected])
 
   // POST
-  const sendReview = (textareaValue, selectValue, keyValue) => {
-    if (!textareaValue.trim()) return; 
+  const sendReview = (comment, rate, asin) => {
+
+    if (!comment.trim()) return; 
+
     setSpinner(true);
 
-    const textarea = textareaValue;
-    const select = selectValue;
-    const key = keyValue;
-    const newComment = { 
-      comment: textarea, 
-      rate: select, 
-      elementId: key
-    };
-
-    fetch(`https://striveschool-api.herokuapp.com/api/comments/`, {
-      method: "POST",
-      headers: { 
-        Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjVjNTQ4ZmQzMzNiMTAwMTU2OWNkMzQiLCJpYXQiOjE3MTczMzEzMjUsImV4cCI6MTcxODU0MDkyNX0.Y0bjkYMSFIjRTSw3MU4lMOmhX7W3zmspvpQlmdXiyHM",
-        "Content-Type": "application/json" },
-      body: JSON.stringify(newComment),
+    axios.post('', {
+      comment: comment, 
+      rate: rate, 
+      elementId: asin
     })
-      .then((response) => response.json()) 
-      .then((data) => {
-        setComments([...comments, data]);
+      .then(response => {
+        setComments([...comments, response.data]);
         alert("Comment added")
       })
       .catch((error) => {
         console.error("Errore nella creazione del commento:", error)
-        alert("Error")}
-      )
+        alert("Errore nella creazione del commento")
+      })
       .finally(() => {
         setSpinner(false);
-      });
+      })
   }
 
   // DELETE
@@ -79,13 +68,8 @@ function CommentArea( { selected } ) {
     
     setSpinner(true);
 
-    fetch(`https://striveschool-api.herokuapp.com/api/comments/${id}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjVjNTQ4ZmQzMzNiMTAwMTU2OWNkMzQiLCJpYXQiOjE3MTczMzEzMjUsImV4cCI6MTcxODU0MDkyNX0.Y0bjkYMSFIjRTSw3MU4lMOmhX7W3zmspvpQlmdXiyHM"
-        }
-    })
-      .then(() => {
+    axios.delete(id)
+      .then(response => {
         setComments(comments.filter((comment) => comment._id !== id));
         alert("Comment Deleted")
       })
@@ -95,36 +79,30 @@ function CommentArea( { selected } ) {
       })
       .finally(() => {
         setSpinner(false);
-      });
+      })
   }
-
 
   //PUT
   const modifyReview = (id, modifyComment, asin, rate) => {
 
     setSpinner(true);
 
-    fetch(`https://striveschool-api.herokuapp.com/api/comments/${id}`, {
-      method: "PUT",
-      headers: { 
-        Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjVjNTQ4ZmQzMzNiMTAwMTU2OWNkMzQiLCJpYXQiOjE3MTczMzEzMjUsImV4cCI6MTcxODU0MDkyNX0.Y0bjkYMSFIjRTSw3MU4lMOmhX7W3zmspvpQlmdXiyHM",
-        "Content-Type": "application/json" },
-      body: JSON.stringify({ comment: modifyComment, rate: rate, elementId: asin}),
+    axios.put(id, {
+      comment: modifyComment, 
+      rate: rate, 
+      elementId: asin
     })
-      .then((response) => response.json())
-      .then((data) => {
-        setComments(
-          comments.map((singoloElemento) =>
-            singoloElemento._id === id ? data : singoloElemento
-          )
-        );
+      .then(response => {
+        setComments(comments.map((singoloCommento) => singoloCommento._id === id ? response.data : singoloCommento));
         alert("Comment Modified")
-      }
-      )
-      .catch((error) => {console.error("Errore nella fetch dei commenti:", error); alert("Error")})
+      })
+      .catch((error) => {
+        console.error("Errore nella modifica del commento:", error)
+        alert("Errore nella modifica del commento")
+      })
       .finally(() => {
         setSpinner(false);
-      });
+      })
   }
 
   //MI "PRENDO" LA DARKMODE
