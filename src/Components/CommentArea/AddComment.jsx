@@ -27,7 +27,7 @@ function AddComment( { sendReview, asin} ) {
   //STILIZZO IN BASE ALLA DARKMODE
   return (
     <>
-      <Form className={ darkMode ? "bg-black text-white fs-5 d-flex flex-column align-items-center rounded-bottom p-2" : "bg-white fs-5 rounded-bottom p-2 d-flex flex-column align-items-center"}>
+      <Form className={ darkMode ? "bg-black text-white fs-5 d-flex flex-column align-items-center rounded-bottom p-2" : "bg-secondary-subtle fs-5 rounded-bottom p-2 d-flex flex-column align-items-center"}>
         <Form.Label >Comment here</Form.Label>
         <Form.Control 
           as="textarea" 
