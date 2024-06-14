@@ -20,7 +20,7 @@ function MyNav( {handleSearchBar, searchInputData, handleDarkMode} ) {
 
   //STILIZZO IN BASE ALLA DARKMODE
   return (
-    <Navbar expand="lg" bg={darkMode ? "black" : "light"} data-bs-theme={darkMode ? "dark" : "light"} >
+    <Navbar expand="lg" className={darkMode ? "bg-black" : "chiaroComponenti"} data-bs-theme={darkMode ? "dark" : "light"} >
       <Container fluid>
         <Link to="/" className='link-underline link-underline-opacity-0'>
           <Navbar.Brand>EpicBooks</Navbar.Brand>

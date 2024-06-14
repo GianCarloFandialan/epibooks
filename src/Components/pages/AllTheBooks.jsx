@@ -40,7 +40,7 @@ function AllTheBooks({ searchInputData, genre }) {
     <>
       {results.length == 0 ? <p className={darkMode ? " text-center fw-bold my-5 text-white" : "text-center fw-bold my-5"} style={{fontSize:"10vw"}}>No results found</p> : <Row className="g-0">
         <Col xs={8} md={8} >
-          <Row>
+          <Row data-testid='books-container'>
             {/* FILTRO IL CONTENUTO DEI LIBRI IN BASE A CIO CHE C'è NELLA BARRA DI RICERCA GRAZIE ALLE PROPS RICEVUTE(GENRE E SEARCHINPUTDATA) */}
             {genre.filter((genre) => genre.title.toLowerCase().includes(searchInputData.toLowerCase())).map((book) => {
 

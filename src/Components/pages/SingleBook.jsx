@@ -16,7 +16,7 @@ function SingleBook( { book, handleSelected, selected, goToBookDetails }) {
       {/* I DETTAGLI DELLA CARD SONO IN BASE ALL'OGGETTO BOOK RICEVUTO COME PROP */}
       <Card className={ darkMode ? "bg-black book-cover d-flex flex-column text-white p-3 mb-3 border rounded" : "bg-white book-cover d-flex flex-column p-3 mb-3 border rounded border-black"}>
         {/* AL CLICK DELL'IMMGAGINE VADO A GESTIRE LO STATO DI SELECTED PASSATO COME PROP E COLORO IL BORDO IN BASE AL CONTENUTO DELLO STATO, SE NON COMBACIA CON L'ASIN DEL LIBRO RIMANE ROSSO SE NO DIVENTA VERDE */}
-        <Card.Img variant="top" src={book.img} onClick={() => handleSelected(book.asin)} className={book.asin == selected ? "border border-success border-5" : "border border-danger border-5"}/>
+        <Card.Img variant="top" src={book.img} onClick={() => handleSelected(book.asin)} className={book.asin == selected ? "border border-success border-5" : "border border-danger border-5"} alt={book.asin}/>
         <Card.Body>
           <Card.Title>{book.title}</Card.Title>
         </Card.Body>

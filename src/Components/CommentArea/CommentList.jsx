@@ -16,7 +16,7 @@ function CommentList( { comments, deleteReview, modifyReview }) {
   //STILIZZO IN BASE ALLA DARKMODE  
   return (
     <>
-      <ListGroup className={ darkMode ? "bg-black text-white rounded-top p-2" : "bg-white rounded-top p-2"}>
+      <ListGroup className={ darkMode ? "bg-black text-white rounded-top p-2" : "bg-white rounded-top p-2"} data-testid='comments-container'>
         <h4 className="text-center">Reviews</h4>
 
         {/* 
