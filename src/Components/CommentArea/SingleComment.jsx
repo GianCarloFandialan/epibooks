@@ -43,7 +43,7 @@ function SingleComment( { comment, idCommento, asinCommento, rateCommento, delet
   //STILIZZO IN BASE ALLA DARKMODE
   return (
     <>
-      <ListGroupItem className={ darkMode ? "bg-black text-white d-flex justify-content-between align-items-center row g-0 p-0 border" : "bg-white d-flex justify-content-between align-items-center row g-0 p-0 border-black border"}>
+      <ListGroupItem className={ darkMode ? "bg-black text-white d-flex justify-content-between align-items-center row g-0 p-0 border book-comment" : "bg-white d-flex justify-content-between align-items-center row g-0 p-0 border-black border book-comment"} data-testid='comment'>
         <div className="col-6 ps-3">
           <small>{comment}</small>
         </div>
