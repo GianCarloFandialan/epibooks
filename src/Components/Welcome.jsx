@@ -12,8 +12,8 @@ function Welcome() {
 
   //STILIZZO IN BASE ALLA DARKMODE
   return (
-    <div className='d-flex justify-content-center'>
-        <Alert variant={darkMode ? "dark text-center mt-3 w-75 fw-bold" : "light text-center mt-3 w-75 fw-bold"}>
+    <div className='d-flex justify-content-center' data-testid='welcome'>
+        <Alert variant={darkMode ? "dark text-center mt-3 w-75 fw-bold" : "light text-center mt-3 w-75 fw-bold"} >
           Welcome to EpiBook
         </Alert>
     </div>

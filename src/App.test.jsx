@@ -4,7 +4,7 @@ import { expect, test } from 'vitest';
 
 test("Verifica che il componente Welcome venga montato correttamente", () => {
   render(<App />);
-  const welcomeComponent = screen.getByText("Welcome to EpiBook");
+  const welcomeComponent = screen.getByTestId("welcome");
   expect(welcomeComponent).toBeInTheDocument();
 });
 
